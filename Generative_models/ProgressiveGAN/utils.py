@@ -102,6 +102,7 @@ def generate_examples(gen, steps, root_path, truncation=0.7, n=None):
             img = gen(noise, alpha, steps)
             save_image(img * 0.5 + 0.5, f"{root_path}/ProGAN/img_{i}.png")
     gen.train()
+    return img
 
 def get_inception_score(imgs, cuda=True, batch_size=32, resize=False, splits=1):
     N = len(imgs)
