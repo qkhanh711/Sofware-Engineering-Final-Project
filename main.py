@@ -17,7 +17,7 @@ except:
     from model import *
     from train import *
 from scipy.stats import truncnorm
-import torch
+
 
 app = FastAPI()
 
