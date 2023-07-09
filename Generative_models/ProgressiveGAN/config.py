@@ -1,4 +1,5 @@
 import torch
+from math import log2
 
 START_TRAIN_AT_IMG_SIZE = 4
 DATASET = '../../Celeba_dataset/img_align_celeba'
