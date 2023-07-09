@@ -88,7 +88,7 @@ def seed_everything(seed=42):
     torch.backends.cudnn.benchmark = False
 
 
-def generate_examples(gen, steps, root_path, truncation=0.7, n=100):
+def generate_examples(gen, steps, root_path, truncation=0.7, n=None):
     """
     Tried using truncation trick here but not sure it actually helped anything, you can
     remove it if you like and just sample from torch.randn
