@@ -94,6 +94,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
                 img = download_image(url)
                 image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
+            image.save(f"Sofware-Engineering-Final_Project/Generative_models/{name}/{prompt}.jpg")
             return image
 
 
@@ -101,7 +102,7 @@ if __name__ == '__main__':
     # generate_with_scratch_model("VAE", path = '/home/nyanmaruk/Uni/Sofware-Engineering-Final_Project/Generate_images')
 
     url = "https://raw.githubusercontent.com/timothybrooks/instruct-pix2pix/main/imgs/example.jpg"
-    prompt = "turn him into cyborg"
+    prompt = "timbrooks/instruct-pix2pix"
     url = ["/home/nyanmaruk/Uni/Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg"]
     
-    print(generate_with_pretrained_model('GFPGAN', prompt=prompt, url = url))
+    print(generate_with_pretrained_model('hakurei/waifu-diffusion', prompt=prompt, url = url))
