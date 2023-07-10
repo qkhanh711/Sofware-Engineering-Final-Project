@@ -40,3 +40,6 @@ def predict_step(image_paths):
 
 # print(predict_step(['/home/nyanmaruk/Uni/Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg']))
 
+def convert2_(path):
+    converted_path = path.replace("_", "/")
+    return converted_path

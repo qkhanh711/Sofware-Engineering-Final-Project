@@ -17,7 +17,7 @@ import PIL
 import requests
 from PIL import Image
 
-from utils import predict_step
+from utils import predict_step, convert2_
 import subprocess
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -62,7 +62,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
        promt       : "turn him into cyborg"
        """
     if name == "nlpconnect/vit-gpt2-image-captioning":
-        return predict_step(url)
+        return predict_step([url])
     elif name == "GFPGAN":
         command = [
             "python",
@@ -110,8 +110,12 @@ def generate(model, number = 1, idx = 1, prompt = None, url = None):
 
 if __name__ == '__main__':
     # img = generate_with_scratch_model("ProGAN", path = '../Sofware-Engineering-Final_Project/Generate_images', idx = 1)
-    model, img = generate("ProGAN", number = 1, idx = 1, prompt = None, url = None)
-    print(img.shape)
+    # model, img   = generate("ProGAN", number = 1, idx = 1, prompt = None, url = None)
+    # model,result = generate("nlpconnect/vit-gpt2-image-captioning",number=1, idx = 1
+    #                         ,url = "../Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg")
+    model,result = generate(str(convert2_("nlpconnect_vit-gpt2-image-captioning")),number=1, idx = 1
+                        ,url = "../Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg")
+    # print(img.shape)
     # url = "https://raw.githubusercontent.com/timothybrooks/instruct-pix2pix/main/imgs/example.jpg"
     # prompt = "timbrooks/instruct-pix2pix"
     # url = ["Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg"]

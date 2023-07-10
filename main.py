@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from Generate import generate_with_pretrained_model, generate_with_scratch_model, generate
-
+from utils import convert2_
 app = FastAPI()
 
 class MyImage(BaseModel):
@@ -16,7 +16,8 @@ class Caption(BaseModel):
 
 @app.post("/generateImage/{models}")
 def gen(models: str):
-    model,result = generate(models,number=1, idx = 1)
+    model,result = generate(str(convert2_(models)),number=1, idx = 1
+                        ,url = "../Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg")
     images = MyImage(
         image=str(result)
     )
