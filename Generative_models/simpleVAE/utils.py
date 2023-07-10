@@ -79,3 +79,4 @@ def inference(dataset, model, digit, num_examples=1):
         out = model.decode(z)
         out = out.view(-1, 1, 28, 28)
         save_image(out, f"/home/nyanmaruk/Uni/Sofware-Engineering-Final_Project/Generate_images/VAE/{digit}_ex{example}.png")
+    return out
