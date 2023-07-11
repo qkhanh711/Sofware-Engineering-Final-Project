@@ -10,8 +10,7 @@ from Generative_models.simpleVAE.VAE import *
 
 import torch
 from torch import autocast
-from diffusers import StableDiffusionPipeline, StableDiffusionInstructPix2PixPipeline, EulerAncestralDiscreteScheduler
-from transformers import VisionEncoderDecoderModel, ViTImageProcessor, AutoTokenizer
+from diffusers import StableDiffusionPipeline, EulerAncestralDiscreteScheduler
 
 import PIL
 import requests
@@ -35,14 +34,16 @@ def generate_with_scratch_model(model_name, path, number = 1, idx = 0):
         opt_gen = optim.Adam(gen.parameters(), lr=config_progressive.LEARNING_RATE, betas=(0.0, 0.99))
 
         load_checkpoint('../weightCelebA/generator.pth', gen, opt_gen, config_progressive.LEARNING_RATE)
-        result = generate_examples(gen, 3, root_path= path, n = number)
+        image = generate_examples(gen, 3, root_path= path, n = number)
+        result = image # Path cua anh
     else:
         dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download = True)
         model = VAE(config_VAE.in_dims, config_VAE.h_dims, config_VAE.z_dims).to(config_VAE.device)
         optimizer = optim.Adam(model.parameters(), lr=config_VAE.lr)
         
         load_checkpoint('../weightVAE/VAE.pth', model, optimizer, config_VAE.lr)
-        result = inference(dataset, model, idx, num_examples=number)
+        image = inference(dataset, model, idx, num_examples=number)
+        result = image # Path cuar anhr
     print(f"Results saved to {path}/{model_name}")
     return result
 
@@ -78,9 +79,11 @@ def generate_with_pretrained_model(name, prompt, url = None):
             "--bg_upsampler",
             "realesrgan"
         ]
-        subprocess.run(["rm", "-rf", "pretrained/GFPGAN/results"], cwd="Sofware-Engineering-Final-Project")
+        subprocess.run(["rm", "-rf", "Generate_images/GFPGAN/"], cwd="Sofware-Engineering-Final-Project")
         subprocess.run(command, cwd="Sofware-Engineering-Final-Project")
-        subprocess.run(["ls", "pretrained/GFPGAN/results/cmp"], cwd="Sofware-Engineering-Final-Project")
+        subprocess.run(["ls", "Generate_images/GFPGAN/cmp"], cwd="Sofware-Engineering-Final-Project")
+        path = "Sofware-Engineering-Final-Project/Generate_images/GFPGAN"
+        return path # Path
     else:
         pipe = StableDiffusionPipeline.from_pretrained(
         name,
@@ -96,8 +99,9 @@ def generate_with_pretrained_model(name, prompt, url = None):
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
                 img = download_image(url)
                 image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
-            image.save(f"Sofware-Engineering-Final-Project/Generative_models/{name}/{prompt}.jpg")
-            return image
+            path = f"Sofware-Engineering-Final-Project/Generative_models/{name}/{prompt}.jpg"
+            image.save(path)
+            return path # path
 
 
 def generate(model, number = 1, idx = 1, prompt = None, url = None):
