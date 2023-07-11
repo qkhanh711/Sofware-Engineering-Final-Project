@@ -15,10 +15,10 @@ class Caption(BaseModel):
     cap : str
 
 
-@app.post("/generateImage/{models}/{params}")
-def gen(models: str, params: str):
+@app.post("/generateImage")
+def gen(models: str, path: str = None, prompt: str = None):
     model,result = generate(convert2_(models),number=1, idx = 1
-                        ,url = convert2_(params))
+                            , prompt = prompt,url = convert2_(path))
     
     images = MyImage(
         image=str(result)
@@ -27,7 +27,7 @@ def gen(models: str, params: str):
     caption = Caption(
         cap = str(result)
     )
-    
+
     if model == "nlpconnect/vit-gpt2-image-captioning":
         return {"generated_texts": jsonable_encoder(caption)}
     else:

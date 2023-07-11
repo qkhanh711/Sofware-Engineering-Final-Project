@@ -3,12 +3,6 @@ from transformers import VisionEncoderDecoderModel, ViTImageProcessor, AutoToken
 import torch
 from PIL import Image
 
-import os
-import glob
-
-import cv2
-import matplotlib.pyplot as plt
-
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

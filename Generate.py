@@ -66,7 +66,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
     elif name == "GFPGAN":
         command = [
             "python",
-            "Sofware-Engineering-Final_Project/pretrained/GFPGAN/inference_gfpgan.py",
+            "Sofware-Engineering-Final-Project/pretrained/GFPGAN/inference_gfpgan.py",
             "-i",
             "pretrained/GFPGAN/inputs/upload",
             "-o",
@@ -78,9 +78,9 @@ def generate_with_pretrained_model(name, prompt, url = None):
             "--bg_upsampler",
             "realesrgan"
         ]
-        subprocess.run(["rm", "-rf", "pretrained/GFPGAN/results"], cwd="Sofware-Engineering-Final_Project")
-        subprocess.run(command, cwd="Sofware-Engineering-Final_Project")
-        subprocess.run(["ls", "pretrained/GFPGAN/results/cmp"], cwd="Sofware-Engineering-Final_Project")
+        subprocess.run(["rm", "-rf", "pretrained/GFPGAN/results"], cwd="Sofware-Engineering-Final-Project")
+        subprocess.run(command, cwd="Sofware-Engineering-Final-Project")
+        subprocess.run(["ls", "pretrained/GFPGAN/results/cmp"], cwd="Sofware-Engineering-Final-Project")
     else:
         pipe = StableDiffusionPipeline.from_pretrained(
         name,
@@ -96,28 +96,26 @@ def generate_with_pretrained_model(name, prompt, url = None):
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
                 img = download_image(url)
                 image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
-            image.save(f"Sofware-Engineering-Final_Project/Generative_models/{name}/{prompt}.jpg")
+            image.save(f"Sofware-Engineering-Final-Project/Generative_models/{name}/{prompt}.jpg")
             return image
 
 
 def generate(model, number = 1, idx = 1, prompt = None, url = None):
     if model == "VAE" or model == "ProGAN":
-        result = generate_with_scratch_model(model,path = '../Sofware-Engineering-Final_Project/Generate_images', number = number, idx = idx)
+        result = generate_with_scratch_model(model,path = '../Sofware-Engineering-Final-Project/Generate_images', number = number, idx = idx)
     else:
         result = generate_with_pretrained_model(model, prompt = prompt, url = url)
     return model,result
     
 
 if __name__ == '__main__':
-    # img = generate_with_scratch_model("ProGAN", path = '../Sofware-Engineering-Final_Project/Generate_images', idx = 1)
-    # model, img   = generate("ProGAN", number = 1, idx = 1, prompt = None, url = None)
-    # model,result = generate("nlpconnect/vit-gpt2-image-captioning",number=1, idx = 1
-    #                         ,url = "../Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg")
-    model,result = generate(convert2_("nlpconnect_vit-gpt2-image-captioning"),number=1, idx = 1
-                        ,url = convert2_("_home_nyanmaruk_Uni_Sofware-Engineering-Final-Project_pretrained_GFPGAN_inputs_upload_deptry.jpg"))
+    # img = generate_with_scratch_model("ProGAN", path = '../Sofware-Engineering-Final-Project/Generate_images', idx = 1)
+    model, result   = generate("ProGAN", number = 1, idx = 1, prompt = None, url = None)
+    # model,result = generate(convert2_("nlpconnect_vit-gpt2-image-captioning"),number=1, idx = 1
+    #                     ,url = convert2_("_home_nyanmaruk_Uni_Sofware-Engineering-Final-Project_pretrained_GFPGAN_inputs_upload_deptry.jpg"))
     print(result)
     # url = "https://raw.githubusercontent.com/timothybrooks/instruct-pix2pix/main/imgs/example.jpg"
     # prompt = "timbrooks/instruct-pix2pix"
-    # url = ["Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg"]
+    # url = ["Sofware-Engineering-Final-Project/pretrained/GFPGAN/inputs/upload/deptry.jpg"]
     
     # print(generate_with_pretrained_model('hakurei/waifu-diffusion', prompt=prompt, url = url))
