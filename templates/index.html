@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generation</title>
+</head>
+<body>
+    <h1>Image Generation</h1>
+    <form id="image-form">
+        <label for="model">Model:</label>
+        <select id="model" name="model">
+            <option value="ProGAN">ProGAN</option>
+            <option value="VAE">VAE</option>
+            <option value="hakurei/waifu-diffusion">hakurei/waifu-diffusion</option>
+            <option value="runwayml/stable-diffusion-v1-5">runwayml/stable-diffusion-v1-5</option>
+            <option value="timbrooks/instruct-pix2pix">timbrooks/instruct-pix2pix</option>
+            <option value ="nlpconnect/vit-gpt2-image-captioning">i2t</option>
+        </select>
+        <br>
+        <label for="path">Path:</label>
+        <input type="text" id="path" name="path">
+        <br>
+        <label for="prompt">Prompt:</label>
+        <input type="text" id="prompt" name="prompt">
+        <br>
+        <label for="number">Number of Images:</label>
+        <input type="number" id="number" name="number" value="1" min="1">
+        <br>
+        <label for="idx">Index:</label>
+        <input type="number" id="idx" name="idx" value="1" min="0">
+        <br>
+        <button type="submit">Generate Images</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -18,6 +18,7 @@ from PIL import Image
 
 from utils import predict_step, convert2_
 import subprocess
+import argparse
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -113,13 +114,25 @@ def generate(model, number = 1, idx = 1, prompt = None, url = None):
     
 
 if __name__ == '__main__':
-    # img = generate_with_scratch_model("ProGAN", path = '../Sofware-Engineering-Final-Project/Generate_images', idx = 1)
-    model, result   = generate("ProGAN", number = 1, idx = 1, prompt = None, url = None)
+    # url = "https://raw.githubusercontent.com/timothybrooks/instruct-pix2pix/main/imgs/example.jpg"
+    # model, result   = generate("ProGAN", number = 1, idx = 1, prompt = None, url = None)
     # model,result = generate(convert2_("nlpconnect_vit-gpt2-image-captioning"),number=1, idx = 1
     #                     ,url = convert2_("_home_nyanmaruk_Uni_Sofware-Engineering-Final-Project_pretrained_GFPGAN_inputs_upload_deptry.jpg"))
-    print(result)
-    # url = "https://raw.githubusercontent.com/timothybrooks/instruct-pix2pix/main/imgs/example.jpg"
-    # prompt = "timbrooks/instruct-pix2pix"
-    # url = ["Sofware-Engineering-Final-Project/pretrained/GFPGAN/inputs/upload/deptry.jpg"]
-    
-    # print(generate_with_pretrained_model('hakurei/waifu-diffusion', prompt=prompt, url = url))
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--models", type=str, help="Model name")
+    parser.add_argument("--number", type=int, default=1, help="Number of images")
+    parser.add_argument("--idx", type=int, default=0, help="Index")
+    parser.add_argument("--prompt", type=str, default=None, help="Prompt")
+    parser.add_argument("--url", type=str, default=None, help="URL")
+
+    args = parser.parse_args()
+
+    model = args.models
+    number = args.number
+    idx = args.idx
+    prompt = args.prompt
+    url = args.url
+
+    name, result = generate(model, number=number, idx=idx, prompt=prompt, url=url)
+    print(result.shape)
