@@ -42,4 +42,4 @@ def predict_step(image_paths):
 
 def convert2_(path):
     converted_path = path.replace("_", "/")
-    return converted_path
+    return str(converted_path)

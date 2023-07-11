@@ -113,9 +113,9 @@ if __name__ == '__main__':
     # model, img   = generate("ProGAN", number = 1, idx = 1, prompt = None, url = None)
     # model,result = generate("nlpconnect/vit-gpt2-image-captioning",number=1, idx = 1
     #                         ,url = "../Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg")
-    model,result = generate(str(convert2_("nlpconnect_vit-gpt2-image-captioning")),number=1, idx = 1
-                        ,url = "../Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg")
-    # print(img.shape)
+    model,result = generate(convert2_("nlpconnect_vit-gpt2-image-captioning"),number=1, idx = 1
+                        ,url = convert2_("_home_nyanmaruk_Uni_Sofware-Engineering-Final-Project_pretrained_GFPGAN_inputs_upload_deptry.jpg"))
+    print(result)
     # url = "https://raw.githubusercontent.com/timothybrooks/instruct-pix2pix/main/imgs/example.jpg"
     # prompt = "timbrooks/instruct-pix2pix"
     # url = ["Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg"]

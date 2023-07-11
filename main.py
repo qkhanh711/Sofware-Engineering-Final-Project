@@ -3,8 +3,9 @@ from typing import Union
 from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
-from Generate import generate_with_pretrained_model, generate_with_scratch_model, generate
+from Generate import generate
 from utils import convert2_
+
 app = FastAPI()
 
 class MyImage(BaseModel):
@@ -14,16 +15,19 @@ class Caption(BaseModel):
     cap : str
 
 
-@app.post("/generateImage/{models}")
-def gen(models: str):
-    model,result = generate(str(convert2_(models)),number=1, idx = 1
-                        ,url = "../Sofware-Engineering-Final_Project/pretrained/GFPGAN/inputs/upload/deptry.jpg")
+@app.post("/generateImage/{models}/{params}")
+def gen(models: str, params: str):
+    model,result = generate(convert2_(models),number=1, idx = 1
+                        ,url = convert2_(params))
+    
     images = MyImage(
         image=str(result)
     )
+
     caption = Caption(
         cap = str(result)
     )
+    
     if model == "nlpconnect/vit-gpt2-image-captioning":
         return {"generated_texts": jsonable_encoder(caption)}
     else:
