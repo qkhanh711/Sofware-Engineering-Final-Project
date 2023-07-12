@@ -68,7 +68,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
     elif name == "GFPGAN":
         command = [
             "python",
-            "Sofware-Engineering-Final-Project/pretrained/GFPGAN/inference_gfpgan.py",
+            "pretrained/GFPGAN/inference_gfpgan.py",
             "-i",
             "pretrained/GFPGAN/inputs/upload",
             "-o",
@@ -80,10 +80,10 @@ def generate_with_pretrained_model(name, prompt, url = None):
             "--bg_upsampler",
             "realesrgan"
         ]
-        subprocess.run(["rm", "-rf", "Generate_images/GFPGAN/"], cwd="Sofware-Engineering-Final-Project")
-        subprocess.run(command, cwd="Sofware-Engineering-Final-Project")
-        subprocess.run(["ls", "Generate_images/GFPGAN/cmp"], cwd="Sofware-Engineering-Final-Project")
-        path = "Sofware-Engineering-Final-Project/Generate_images/GFPGAN"
+        subprocess.run(["rm", "-rf", "Generate_images/GFPGAN/results/*"], cwd="../Sofware-Engineering-Final-Project")
+        subprocess.run(command, cwd="../Sofware-Engineering-Final-Project")
+        subprocess.run(["ls", "pretrained/GFPGAN/results/cmp"], cwd="../Sofware-Engineering-Final-Project/")
+        path = "../Sofware-Engineering-Final-Project/pretrained/GFPGAN/results/cmp/deptry00.png"
         return path # Path
     else:
         pipe = StableDiffusionPipeline.from_pretrained(
@@ -120,7 +120,7 @@ if __name__ == '__main__':
     #                     ,url = convert2_("_home_nyanmaruk_Uni_Sofware-Engineering-Final-Project_pretrained_GFPGAN_inputs_upload_deptry.jpg"))
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--models", type=str, help="Model name")
+    parser.add_argument("--models", type=str,default= "GFPGAN",help="Model name")
     parser.add_argument("--number", type=int, default=1, help="Number of images")
     parser.add_argument("--idx", type=int, default=0, help="Index")
     parser.add_argument("--prompt", type=str, default=None, help="Prompt")
@@ -135,4 +135,4 @@ if __name__ == '__main__':
     url = args.url
 
     name, result = generate(model, number=number, idx=idx, prompt=prompt, url=url)
-    print(result.shape)
+    # print(result.shape)

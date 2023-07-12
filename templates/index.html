@@ -3,38 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Generation</title>
+    <title>Image Generator</title>
+    <style>
+        body {
+            font-family: Tahoma;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .heading {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        .form-label {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .form-input {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 20px;
+            padding: 5px;
+            font-size: 14px;
+        }
+        .form-select {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .form-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-button:hover {
+            background-color: #0069d9;
+        }
+    </style>
 </head>
 <body>
     <h1>Image Generation</h1>
     <form id="image-form">
-        <label for="model">Model:</label>
-        <select id="model" name="model">
-            <option value="ProGAN">ProGAN</option>
-            <option value="VAE">VAE</option>
-            <option value="hakurei/waifu-diffusion">hakurei/waifu-diffusion</option>
-            <option value="runwayml/stable-diffusion-v1-5">runwayml/stable-diffusion-v1-5</option>
-            <option value="timbrooks/instruct-pix2pix">timbrooks/instruct-pix2pix</option>
-            <option value ="nlpconnect/vit-gpt2-image-captioning">nlpconnect/vit-gpt2-image-captioning</option>
-        </select>
-        <br>
-        <label for="path">Path:</label>
-        <input type="text" id="path" name="path">
-        <br>
-        <label for="prompt">Prompt:</label>
-        <input type="text" id="prompt" name="prompt">
-        <br>
-        <label for="number">Number of Images:</label>
-        <input type="number" id="number" name="number" value="1" min="1">
-        <br>
-        <label for="idx">Index:</label>
-        <input type="number" id="idx" name="idx" value="1" min="0">
-        <br>
-        <button type="submit">Generate Images</button>
-    </form>
+                <div>
+                    <label for="model" class="form-label">Model:</label>
+                    <select id="model" name="model" class="form-select">
+                        <option value="GFPGAN">GFPGAN</option>
+                        <option value="ProGAN">ProGAN</option>
+                        <option value="VAE">VAE</option>
+                        <option value="hakurei/waifu-diffusion">hakurei/waifu-diffusion</option>
+                        <option value="runwayml/stable-diffusion-v1-5">runwayml/stable-diffusion-v1-5</option>
+                        <option value="timbrooks/instruct-pix2pix">timbrooks/instruct-pix2pix</option>
+                        <option value="nlpconnect/vit-gpt2-image-captioning">nlpconnect/vit-gpt2-image-captioning</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="path" class="form-label">Path:</label>
+                    <input type="text" id="path" name="path" class="form-input">
+                </div>
+                <div>
+                    <label for="prompt" class="form-label">Prompt:</label>
+                    <input type="text" id="prompt" name="prompt" class="form-input">
+                </div>
+                <div>
+                    <label for="number" class="form-label">Number of Images:</label>
+                    <input type="number" id="number" name="number" value="1" min="1" class="form-input">
+                </div>
+                <div>
+                    <label for="idx" class="form-label">Index:</label>
+                    <input type="number" id="idx" name="idx" value="1" min="0" class="form-input">
+                </div>
+                <button type="submit" class="form-button">Generate Images</button>
+            </form>
+            <div id="result"></div>
+        </div>
+    </div>
 
-    <div id="result"></div>
-
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
     <script src="/static/script.js"></script>
 </body>
 </html>

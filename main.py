@@ -8,6 +8,8 @@ from pydantic import BaseModel
 from Generate import generate
 from utils import convert2_
 import os
+from sqlalchemy.ext.declarative import declarative_base
+
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")

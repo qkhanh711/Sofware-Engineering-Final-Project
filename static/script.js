@@ -4,10 +4,10 @@ document.getElementById("image-form").addEventListener("submit", async function(
     const form = event.target;
     const formData = new FormData(form);
 
-    const res = {}
+    const res = {};
 
-    for(const [key,value] of formData) {
-        res[key] = value
+    for(const [key, value] of formData) {
+        res[key] = value;
     }
 
     console.log(res);
@@ -22,29 +22,22 @@ document.getElementById("image-form").addEventListener("submit", async function(
 
     const data = await response.json();
 
-    if (data.success) {
-        const resultResponse = await fetch("/generateImage");
-        const resultData = await resultResponse.json();
+    if (data.generated_result) {
+        const generatedResult = data.generated_result;
 
-        if (resultData.generated_result) {
-            const generatedResult = resultData.generated_result;
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "";
 
-            const resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = "";
-
-            if (generatedResult.hasOwnProperty("image")) {
-                const imgElement = document.createElement("img");
-                imgElement.src = generatedResult.image;
-                resultDiv.appendChild(imgElement);
-            } else if (generatedResult.hasOwnProperty("cap")) {
-                const pElement = document.createElement("p");
-                pElement.textContent = generatedResult.cap;
-                resultDiv.appendChild(pElement);
-            }
-        } else {
-            console.log("No generated result available");
+        if (generatedResult.image) {
+            const imgElement = document.createElement("img");
+            imgElement.src = `/getImage?path=${generatedResult.image}`;
+            resultDiv.appendChild(imgElement);
+        } else if (generatedResult.cap) {
+            const pElement = document.createElement("p");
+            pElement.textContent = generatedResult.cap;
+            resultDiv.appendChild(pElement);
         }
     } else {
-        console.log("Failed to generate images");
+        console.log("No generated result available");
     }
 });
