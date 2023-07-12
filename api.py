@@ -44,6 +44,7 @@ def gen(models: str, path: str = None, prompt: str = None):
     else:
         return {"success": False}
 
+
 @app.get("/getGeneratedResult")
 def getGeneratedResult():
     global generated_result

@@ -4,15 +4,26 @@ document.getElementById("image-form").addEventListener("submit", async function(
     const form = event.target;
     const formData = new FormData(form);
 
+    const res = {}
+
+    for(const [key,value] of formData) {
+        res[key] = value
+    }
+
+    console.log(res);
+
     const response = await fetch("/generateImage", {
         method: "POST",
-        body: formData
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(res),
     });
 
     const data = await response.json();
 
     if (data.success) {
-        const resultResponse = await fetch("/getGeneratedResult");
+        const resultResponse = await fetch("/generateImage");
         const resultData = await resultResponse.json();
 
         if (resultData.generated_result) {
