@@ -16,7 +16,7 @@ from torch import nn, optim
 from torchvision.utils import save_image
 
 # Load data MNIST
-dataset = datasets.MNIST(root="/home/nyanmaruk/Uni/datasets/mnist", train=True, transform=transforms.ToTensor(), download = True)
+dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download = True)
 train_loader = DataLoader(dataset=dataset, batch_size=config.batch_size, shuffle = True)
 
 model = VAE(config.in_dims, config.h_dims, config.z_dims).to(config.device)
