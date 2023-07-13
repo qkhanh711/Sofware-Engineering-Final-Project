@@ -36,7 +36,7 @@ def generate_with_scratch_model(model_name, path, number = 1, idx = 0):
 
         load_checkpoint('../weightCelebA/generator.pth', gen, opt_gen, config_progressive.LEARNING_RATE)
         image = generate_examples(gen, 3, root_path= path, n = number)
-        result = image # Path cua anh
+        result = "/Generate_images/ProGAN/img_0.png" # Path cua anh
     else:
         dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download = True)
         model = VAE(config_VAE.in_dims, config_VAE.h_dims, config_VAE.z_dims).to(config_VAE.device)
@@ -44,7 +44,7 @@ def generate_with_scratch_model(model_name, path, number = 1, idx = 0):
         
         load_checkpoint('../weightVAE/VAE.pth', model, optimizer, config_VAE.lr)
         image = inference(dataset, model, idx, num_examples=number)
-        result = image # Path cuar anhr
+        result = "/Generate_images/ProGAN/1_ex0.png" # Path cuar anhr
     print(f"Results saved to {path}/{model_name}")
     return result
 
@@ -83,7 +83,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
         subprocess.run(["rm", "-rf", "Generate_images/GFPGAN/results/*"], cwd="../Sofware-Engineering-Final-Project")
         subprocess.run(command, cwd="../Sofware-Engineering-Final-Project")
         subprocess.run(["ls", "pretrained/GFPGAN/results/cmp"], cwd="../Sofware-Engineering-Final-Project/")
-        path = "../Sofware-Engineering-Final-Project/pretrained/GFPGAN/results/cmp/deptry00.png"
+        path = "/pretrained/GFPGAN/results/cmp/deptry_00.png"
         return path # Path
     else:
         pipe = StableDiffusionPipeline.from_pretrained(

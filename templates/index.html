@@ -51,7 +51,8 @@
     </style>
 </head>
 <body>
-    <h1>Image Generation</h1>
+    <div class="container">
+        <h1 class="heading">Image Generator</h1>
     <form id="image-form">
                 <div>
                     <label for="model" class="form-label">Model:</label>
@@ -83,12 +84,14 @@
                 </div>
                 <button type="submit" class="form-button">Generate Images</button>
             </form>
-            <div id="result"></div>
+            <div id="result">
+                <!-- <img src="../pretrained/GFPGAN/results/cmp/deptry_00.png"/> -->
+            </div>
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script> -->
     <script src="/static/script.js"></script>
 </body>
 </html>

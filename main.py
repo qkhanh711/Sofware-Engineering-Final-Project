@@ -13,6 +13,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/pretrained", StaticFiles(directory="pretrained"), name="pretrained")
 templates = Jinja2Templates(directory="templates")
 
 class ImageGenerationRequest(BaseModel):
