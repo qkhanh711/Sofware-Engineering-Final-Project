@@ -100,6 +100,8 @@ def generate_examples(gen, steps, root_path, truncation=0.7, n=None):
             noise = torch.tensor(truncnorm.rvs(-truncation, truncation, size=(1, config.Z_DIM, 1, 1)),
                                  device=config.DEVICE, dtype=torch.float32)
             img = gen(noise, alpha, steps)
+            import torch.nn.functional as F
+            img = F.interpolate(img, size=(512, 512), mode='bilinear', align_corners=False)
             save_image(img * 0.5 + 0.5, f"{root_path}/ProGAN/img_{i}.png")
     gen.train()
     return img

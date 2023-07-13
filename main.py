@@ -3,16 +3,15 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi import FastAPI, Request
-from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from Generate import generate
 from utils import convert2_
 import os
-from sqlalchemy.ext.declarative import declarative_base
 
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/Generate_images", StaticFiles(directory="Generate_images"), name="Generate_images")
 app.mount("/pretrained", StaticFiles(directory="pretrained"), name="pretrained")
 templates = Jinja2Templates(directory="templates")
 

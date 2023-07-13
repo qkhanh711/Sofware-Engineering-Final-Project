@@ -35,7 +35,7 @@ def generate_with_scratch_model(model_name, path, number = 1, idx = 0):
         opt_gen = optim.Adam(gen.parameters(), lr=config_progressive.LEARNING_RATE, betas=(0.0, 0.99))
 
         load_checkpoint('../weightCelebA/generator.pth', gen, opt_gen, config_progressive.LEARNING_RATE)
-        image = generate_examples(gen, 3, root_path= path, n = number)
+        generate_examples(gen, 3, root_path= path, n = number)
         result = "/Generate_images/ProGAN/img_0.png" # Path cua anh
     else:
         dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download = True)
@@ -43,8 +43,8 @@ def generate_with_scratch_model(model_name, path, number = 1, idx = 0):
         optimizer = optim.Adam(model.parameters(), lr=config_VAE.lr)
         
         load_checkpoint('../weightVAE/VAE.pth', model, optimizer, config_VAE.lr)
-        image = inference(dataset, model, idx, num_examples=number)
-        result = "/Generate_images/ProGAN/1_ex0.png" # Path cuar anhr
+        inference(dataset, model, idx, num_examples=number)
+        result = f"/Generate_images/VAE/{idx}_ex0.png" # Path cuar anhr
     print(f"Results saved to {path}/{model_name}")
     return result
 

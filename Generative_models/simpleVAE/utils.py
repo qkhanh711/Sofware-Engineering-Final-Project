@@ -8,11 +8,9 @@ try:
 except:
     import config
     from VAE import VAE
-import torchvision.datasets as datasets
-from torchvision import transforms
+import torch.nn.functional as F
 from torchvision.utils import save_image
 import torch.utils.data
-import matplotlib.pyplot as plt
 
 
 def save_checkpoint(model, optimizer, filename="my_checkpoint.pth.tar"):
@@ -78,5 +76,6 @@ def inference(dataset, model, digit, num_examples=1):
         z = mu + sigma * epsilon
         out = model.decode(z)
         out = out.view(-1, 1, 28, 28)
+        out = F.interpolate(out, size=(512, 512), mode='bilinear', align_corners=False)
         save_image(out, f"../Sofware-Engineering-Final-Project/Generate_images/VAE/{digit}_ex{example}.png")
     return out

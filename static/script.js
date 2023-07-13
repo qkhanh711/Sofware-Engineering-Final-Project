@@ -33,6 +33,7 @@ document.getElementById("image-form").addEventListener("submit", async function(
         resultDiv.innerHTML = "";
 
         if (generatedResult.image) {
+            
             const imgElement = document.createElement("img");
             imgElement.src = `.${generatedResult.image}`;
             resultDiv.appendChild(imgElement);
