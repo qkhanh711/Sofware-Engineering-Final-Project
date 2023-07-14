@@ -13,7 +13,6 @@ except:
     from Generative_models.simpleVAE.utils import *
     from Generative_models.simpleVAE.VAE import *
 from torch import nn, optim
-from torchvision.utils import save_image
 
 # Load data MNIST
 dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download = True)

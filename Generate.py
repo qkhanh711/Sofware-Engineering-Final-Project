@@ -80,7 +80,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
             "--bg_upsampler",
             "realesrgan"
         ]
-        subprocess.run(["rm", "-rf", "Generate_images/GFPGAN/results/*"], cwd="../Sofware-Engineering-Final-Project")
+        # subprocess.run(["rm", "-rf", "pretrained/GFPGAN/results"], cwd="Sofware-Engineering-Final-Project")
         subprocess.run(command, cwd="../Sofware-Engineering-Final-Project")
         subprocess.run(["ls", "pretrained/GFPGAN/results/cmp"], cwd="../Sofware-Engineering-Final-Project/")
         path = "/pretrained/GFPGAN/results/cmp/deptry_00.png"
@@ -100,7 +100,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
                 img = download_image(url)
                 image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
-            path = f"Sofware-Engineering-Final-Project/Generative_models/{name}/{prompt}.jpg"
+            path = f"/Generative_images/{name}/pdf.jpg"
             image.save(path)
             return path # path
 
@@ -120,7 +120,7 @@ if __name__ == '__main__':
     #                     ,url = convert2_("_home_nyanmaruk_Uni_Sofware-Engineering-Final-Project_pretrained_GFPGAN_inputs_upload_deptry.jpg"))
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--models", type=str,default= "GFPGAN",help="Model name")
+    parser.add_argument("--models", type=str,default= "ProGAN",help="Model name")
     parser.add_argument("--number", type=int, default=1, help="Number of images")
     parser.add_argument("--idx", type=int, default=0, help="Index")
     parser.add_argument("--prompt", type=str, default=None, help="Prompt")
@@ -135,4 +135,4 @@ if __name__ == '__main__':
     url = args.url
 
     name, result = generate(model, number=number, idx=idx, prompt=prompt, url=url)
-    # print(result.shape)
+    print(result)
