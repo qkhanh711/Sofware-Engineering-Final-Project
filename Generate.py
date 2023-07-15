@@ -16,6 +16,7 @@ import PIL
 import requests
 from PIL import Image
 
+import os
 from utils import predict_step
 import subprocess
 import argparse
@@ -91,15 +92,20 @@ def generate_with_pretrained_model(name, prompt, url = None):
         ).to(device)
         with autocast("cpu"):
             if name == 'hakurei/waifu-diffusion':
-                image = pipe(prompt, guidance_scale=6)["images"][0]
+                gen_image = pipe(prompt, guidance_scale=6)["images"][0]
             elif name == "runwayml/stable-diffusion-v1-5":
-                image = pipe(prompt).images[0] 
+                gen_image = pipe(prompt).images[0] 
             elif name == "timbrooks/instruct-pix2pix":
+                pipe = StableDiffusionPipeline.from_pretrained(
+                name,
+                torch_dtype=torch.float32,
+                safety_checker=None
+                ).to(device)
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
                 img = download_image(url)
-                image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
+                gen_image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
             path = f"Generative_images/{name}/pdf.jpg"
-            image.save(path)
+            gen_image.save(path)
             return path 
 
 
@@ -122,7 +128,7 @@ if __name__ == '__main__':
     parser.add_argument("--number", type=int, default=1, help="Number of images")
     parser.add_argument("--idx", type=int, default=0, help="Index")
     parser.add_argument("--prompt", type=str, default=None, help="Prompt")
-    parser.add_argument("--url", type=str, default="/Generate_input_images/timbrooks/instruct-pix2pix/deptry.jpg", help="URL")
+    parser.add_argument("--url", type=str, default=None, help="URL")
 
     args = parser.parse_args()
 
