@@ -70,7 +70,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
             "python",
             "pretrained/GFPGAN/inference_gfpgan.py",
             "-i",
-            "Input_images/GFPGAN",
+            "Generate_input_images/GFPGAN",
             "-o",
             "Generate_images/GFPGAN/results",
             "-v",

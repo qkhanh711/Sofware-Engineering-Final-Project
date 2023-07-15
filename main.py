@@ -63,3 +63,4 @@ async def get_image(path: str):
 if __name__ == "__main__":
     import uvicorn
     # uvicorn.run(app)
+    # http://127.0.0.1:8000/generateImage?models=nlpconnect_vit-gpt2-image-captioning&path=_home_nyanmaruk_Uni_Sofware-Engineering-Final-Project_pretrained_GFPGAN_inputs_upload_deptry.jpg&prompt=some_prompt
