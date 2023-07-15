@@ -3,6 +3,10 @@ from transformers import VisionEncoderDecoderModel, ViTImageProcessor, AutoToken
 import torch
 from PIL import Image
 
+import PIL
+import requests
+import os
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -37,3 +41,16 @@ def predict_step(image_paths):
 def convert2_(path):
     converted_path = path.replace("_", "/")
     return str(converted_path)
+
+def download_image(url, name):
+    image = PIL.Image.open(requests.get(url, stream=True).raw)
+    image = PIL.ImageOps.exif_transpose(image)
+    image = image.convert("RGB")
+    if url.startswith("https://"):
+        path = save_input(image, name)
+        print(f"Save image to {path}")
+    return image
+
+def save_input(image, name):
+    image.save(f"Input_images/{name}/input.png")
+    return f"Input_images/{name}/input.png"

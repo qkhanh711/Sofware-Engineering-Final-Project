@@ -15,20 +15,12 @@ from torchvision import transforms
 from diffusers import StableDiffusionPipeline, EulerAncestralDiscreteScheduler
 from diffusers import StableDiffusionInstructPix2PixPipeline as StableDiffusionPipelineP2P
 
-import PIL
-import requests
-
-from utils import predict_step
+from utils import predict_step, download_image
 import subprocess
 import argparse
+import PIL
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-def download_image(url):
-    image = PIL.Image.open(requests.get(url, stream=True).raw)
-    image = PIL.ImageOps.exif_transpose(image)
-    image = image.convert("RGB")
-    return image
 
 
 def generate_with_scratch_model(model_name, path, number = 1, idx = 0):
@@ -63,14 +55,19 @@ def generate_with_pretrained_model(name, prompt, url = None):
        Name models : "timbrooks/instruct-pix2pix"
        promt       : "turn him into cyborg"
        """
+    
+    input_img = download_image(url, name)
     if name == "nlpconnect/vit-gpt2-image-captioning":
-        return predict_step([url])
+        if url.startswith("https://"):
+            return predict_step(["Input_images/nlpconnect/vit-gpt2-image-captioning/input.png"])
+        else:
+            return predict_step([url])
     elif name == "GFPGAN":
         command = [
             "python",
             "pretrained/GFPGAN/inference_gfpgan.py",
             "-i",
-            "Generate_input_images/GFPGAN",
+            "Input_images/GFPGAN",
             "-o",
             "Generate_images/GFPGAN/results",
             "-v",
@@ -102,8 +99,11 @@ def generate_with_pretrained_model(name, prompt, url = None):
                 gen_image = pipe(prompt).images[0] 
             elif name == "timbrooks/instruct-pix2pix":
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
-                img = download_image(url)
-                gen_image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
+                if url.startswith("https://"):
+                    input_img = input_img
+                else:
+                    input_img = PIL.Image.open(url)
+                gen_image = pipe(prompt, image=input_img, num_inference_steps=10, image_guidance_scale=1).images[0]
             path = f"Generative_images/{name}/pdf.png"
             gen_image.save(f"Generate_images/{name}/pdf.png")
             return path 
@@ -140,3 +140,4 @@ if __name__ == '__main__':
 
     name, result = generate(model, number=number, idx=idx, prompt=prompt, url=url)
     print(result)
+
