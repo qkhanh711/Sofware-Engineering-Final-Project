@@ -1,4 +1,3 @@
-import torch.optim as optim
 from Generative_models.ProgressiveGAN import config as config_progressive
 from Generative_models.ProgressiveGAN.utils import *
 from Generative_models.ProgressiveGAN.model import *
@@ -10,13 +9,15 @@ from Generative_models.simpleVAE.VAE import *
 
 import torch
 from torch import autocast
+import torch.optim as optim
+from torchvision import transforms
+
 from diffusers import StableDiffusionPipeline, EulerAncestralDiscreteScheduler
+from diffusers import StableDiffusionInstructPix2PixPipeline as StableDiffusionPipelineP2P
 
 import PIL
 import requests
-from PIL import Image
 
-import os
 from utils import predict_step
 import subprocess
 import argparse
@@ -85,7 +86,11 @@ def generate_with_pretrained_model(name, prompt, url = None):
         path = "/Generate_images/GFPGAN/results/cmp/gfp_00.png"
         return path 
     else:
-        pipe = StableDiffusionPipeline.from_pretrained(
+        if name == "timbrooks/instruct-pix2pix":
+            df = StableDiffusionPipelineP2P
+        else:
+            df = StableDiffusionPipeline
+        pipe = df.from_pretrained(
         name,
         torch_dtype=torch.float32,
         safety_checker=None
@@ -96,16 +101,11 @@ def generate_with_pretrained_model(name, prompt, url = None):
             elif name == "runwayml/stable-diffusion-v1-5":
                 gen_image = pipe(prompt).images[0] 
             elif name == "timbrooks/instruct-pix2pix":
-                pipe = StableDiffusionPipeline.from_pretrained(
-                name,
-                torch_dtype=torch.float32,
-                safety_checker=None
-                ).to(device)
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
                 img = download_image(url)
                 gen_image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
             path = f"Generative_images/{name}/pdf.jpg"
-            gen_image.save(path)
+            gen_image.save(f"Generative_images/{name}/pdf.jpg")
             return path 
 
 
