@@ -77,5 +77,5 @@ def inference(dataset, model, digit, num_examples=1):
         out = model.decode(z)
         out = out.view(-1, 1, 28, 28)
         out = F.interpolate(out, size=(512, 512), mode='bilinear', align_corners=False)
-        save_image(out, f"../Sofware-Engineering-Final-Project/Generate_images/VAE/{digit}_ex{example}.png")
+        save_image(out, f"../Sofware-Engineering-Final-Project/Generate_images/VAE/VAE_{digit}.png")
     return out

@@ -168,7 +168,7 @@ def main():
                 save_restore_path = os.path.join(args.output, 'restored_imgs', f'gfp_{args.suffix}.{extension}')
             else:
                 save_restore_path = os.path.join(args.output, 'restored_imgs', f'{basename}.{extension}')
-                # save_restore_path = os.path.join(args.output, 'restored_imgs', f'gfp.{extension}')
+                save_restore_path = os.path.join(args.output, 'restored_imgs', f'gfp.{extension}')
             imwrite(restored_img, save_restore_path)
 
     print(f'Results are in the [{args.output}] folder.')

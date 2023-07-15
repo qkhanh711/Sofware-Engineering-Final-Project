@@ -36,7 +36,7 @@ def generate_with_scratch_model(model_name, path, number = 1, idx = 0):
 
         load_checkpoint('../weightCelebA/generator.pth', gen, opt_gen, config_progressive.LEARNING_RATE)
         generate_examples(gen, 3, root_path= path, n = number)
-        result = "/Generate_images/ProGAN/img_0.png" # Path cua anh
+        result = "/Generate_images/ProGAN/img_0.png" 
     else:
         dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download = True)
         model = VAE(config_VAE.in_dims, config_VAE.h_dims, config_VAE.z_dims).to(config_VAE.device)
@@ -44,7 +44,7 @@ def generate_with_scratch_model(model_name, path, number = 1, idx = 0):
         
         load_checkpoint('../weightVAE/VAE.pth', model, optimizer, config_VAE.lr)
         inference(dataset, model, idx, num_examples=number)
-        result = f"/Generate_images/VAE/{idx}_ex0.png" # Path cuar anhr
+        result = f"/Generate_images/VAE/{idx}_ex0.png" 
     print(f"Results saved to {path}/{model_name}")
     return result
 
