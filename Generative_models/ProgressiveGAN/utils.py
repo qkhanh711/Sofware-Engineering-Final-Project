@@ -9,6 +9,7 @@ try:
 except:
     import config
 
+from torch.nn import functional as F
 from torchvision.utils import save_image
 from scipy.stats import truncnorm
 import torch.utils.data
@@ -96,8 +97,9 @@ def generate_examples(gen, steps, root_path, truncation=0.7, n=None):
                                  device=config.DEVICE, dtype=torch.float32)
             img = gen(noise, alpha, steps)
             import torch.nn.functional as F
-            img = nn.interpolate(img, size=(512, 512), mode='bilinear', align_corners=False)
+            img = F.interpolate(img, size=(512, 512), mode='bilinear', align_corners=False)
             path = f"{root_path}/ProGAN/ProGAN_{i}.png"
+            path_save = f"/Generate_images/ProGAN/ProGAN_{i}.png.png"
             save_image(img * 0.5 + 0.5, path)
     gen.train()
-    return img, path
+    return img, path_save

@@ -30,6 +30,7 @@ def generate_with_scratch_model(model_name, path, number = 1, idx = 0):
 
         load_checkpoint('../weightCelebA/generator.pth', gen, opt_gen, config_progressive.LEARNING_RATE)
         tensor, path_save = generate_examples(gen, 3, root_path= path, n = number)
+        print(path_save)
     else:
         dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download = True)
         model = VAE(config_VAE.in_dims, config_VAE.h_dims, config_VAE.z_dims).to(config_VAE.device)
