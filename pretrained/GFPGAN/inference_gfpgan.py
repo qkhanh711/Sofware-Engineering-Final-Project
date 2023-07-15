@@ -146,13 +146,15 @@ def main():
             # save restored face
             if args.suffix is not None:
                 save_face_name = f'{basename}_{idx:02d}_{args.suffix}.png'
+                save_face_name = f'gfp_{idx:02d}_{args.suffix}.png'
             else:
                 save_face_name = f'{basename}_{idx:02d}.png'
+                save_face_name = f'gfp_{idx:02d}_{args.suffix}.png'
             save_restore_path = os.path.join(args.output, 'restored_faces', save_face_name)
             imwrite(restored_face, save_restore_path)
             # save comparison image
             cmp_img = np.concatenate((cropped_face, restored_face), axis=1)
-            imwrite(cmp_img, os.path.join(args.output, 'cmp', f'{basename}_{idx:02d}.png'))
+            imwrite(cmp_img, os.path.join(args.output, 'cmp', f'gfp_{idx:02d}.png'))
 
         # save restored img
         if restored_img is not None:

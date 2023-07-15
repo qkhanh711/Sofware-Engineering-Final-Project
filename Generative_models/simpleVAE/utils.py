@@ -67,12 +67,12 @@ def inference(dataset, model, digit, num_examples=1):
     encodings_digit = []
     for d in range(10):
         with torch.no_grad():
-            mu, sigma = model.encode(images[d].view(1, 784))
+            mu, sigma = model.encode(images[d].view(1, 784).to(config.device))
         encodings_digit.append((mu, sigma))
 
     mu, sigma = encodings_digit[digit]
     for example in range(num_examples):
-        epsilon = torch.randn_like(sigma)
+        epsilon = torch.randn_like(sigma).to(config.device)
         z = mu + sigma * epsilon
         out = model.decode(z)
         out = out.view(-1, 1, 28, 28)
