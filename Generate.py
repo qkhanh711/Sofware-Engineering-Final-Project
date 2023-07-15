@@ -82,7 +82,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
         subprocess.run(command, cwd="../Sofware-Engineering-Final-Project")
         # subprocess.run(["ls", "pretrained/GFPGAN/results/cmp"], cwd="../Sofware-Engineering-Final-Project/")
         path = "/Generate_images/GFPGAN/results/cmp/gfp_00.png"
-        return path # Path
+        return path 
     else:
         pipe = StableDiffusionPipeline.from_pretrained(
         name,
@@ -98,9 +98,9 @@ def generate_with_pretrained_model(name, prompt, url = None):
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
                 img = download_image(url)
                 image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
-            path = f"/Generative_images/{name}/pdf.jpg"
+            path = f"Generative_images/{name}/pdf.jpg"
             image.save(path)
-            return path # path
+            return path 
 
 
 def generate(model, number = 1, idx = 1, prompt = None, url = None):
@@ -122,7 +122,7 @@ if __name__ == '__main__':
     parser.add_argument("--number", type=int, default=1, help="Number of images")
     parser.add_argument("--idx", type=int, default=0, help="Index")
     parser.add_argument("--prompt", type=str, default=None, help="Prompt")
-    parser.add_argument("--url", type=str, default=None, help="URL")
+    parser.add_argument("--url", type=str, default="/Generate_input_images/timbrooks/instruct-pix2pix/deptry.jpg", help="URL")
 
     args = parser.parse_args()
 
