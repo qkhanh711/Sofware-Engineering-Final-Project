@@ -56,13 +56,19 @@ def generate_with_pretrained_model(name, prompt, url = None):
        promt       : "turn him into cyborg"
        """
     
-    input_img = download_image(url, name)
+    
     if name == "nlpconnect/vit-gpt2-image-captioning":
         if url.startswith("https://"):
+            input_img = download_image(url, name)
             return predict_step(["Input_images/nlpconnect/vit-gpt2-image-captioning/input.png"])
         else:
             return predict_step([url])
     elif name == "GFPGAN":
+        if url.startswith("https://"):
+            input_img = download_image(url, name)
+        else:
+            input_img = PIL.Image.open(url)
+            input_img.save("Input_images/GFPGAN/input.png")
         command = [
             "python",
             "pretrained/GFPGAN/inference_gfpgan.py",
@@ -100,7 +106,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
             elif name == "timbrooks/instruct-pix2pix":
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
                 if url.startswith("https://"):
-                    input_img = input_img
+                    input_img =  download_image(url, name)
                 else:
                     input_img = PIL.Image.open(url)
                 gen_image = pipe(prompt, image=input_img, num_inference_steps=10, image_guidance_scale=1).images[0]
