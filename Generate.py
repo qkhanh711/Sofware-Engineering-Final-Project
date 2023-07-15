@@ -16,7 +16,7 @@ import PIL
 import requests
 from PIL import Image
 
-from utils import predict_step, convert2_
+from utils import predict_step
 import subprocess
 import argparse
 
@@ -70,7 +70,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
             "python",
             "pretrained/GFPGAN/inference_gfpgan.py",
             "-i",
-            "pretrained/GFPGAN/inputs/upload",
+            "Input_images/GFPGAN",
             "-o",
             "Generate_images/GFPGAN/results",
             "-v",
