@@ -104,8 +104,8 @@ def generate_with_pretrained_model(name, prompt, url = None):
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
                 img = download_image(url)
                 gen_image = pipe(prompt, image=img, num_inference_steps=10, image_guidance_scale=1).images[0]
-            path = f"Generative_images/{name}/pdf.jpg"
-            gen_image.save(f"Generative_images/{name}/pdf.jpg")
+            path = f"Generative_images/{name}/pdf.png"
+            gen_image.save(f"Generate_images/{name}/pdf.png")
             return path 
 
 
