@@ -102,6 +102,7 @@ def generate_examples(gen, steps, root_path, truncation=0.7, n=None):
             img = gen(noise, alpha, steps)
             import torch.nn.functional as F
             img = F.interpolate(img, size=(512, 512), mode='bilinear', align_corners=False)
-            save_image(img * 0.5 + 0.5, f"{root_path}/ProGAN/ProGAN_{i}.png")
+            path = f"{root_path}/ProGAN/ProGAN_{i}.png"
+            save_image(img * 0.5 + 0.5, path)
     gen.train()
-    return img
+    return img, path
