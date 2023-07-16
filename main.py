@@ -11,6 +11,7 @@ import os
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/style", StaticFiles(directory="style"), name="style")
 app.mount("/Input_images", StaticFiles(directory="Input_images"), name="Input_images")
 app.mount("/Generate_images", StaticFiles(directory="Generate_images"), name="Generate_images")
 app.mount("/pretrained", StaticFiles(directory="pretrained"), name="pretrained")

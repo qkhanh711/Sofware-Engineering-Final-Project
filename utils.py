@@ -54,3 +54,11 @@ def download_image(url, name):
 def save_input(image, name):
     image.save(f"Input_images/{name}/input.png")
     return f"Input_images/{name}/input.png"
+
+def CheckthenDown(url,name):
+    if url.startswith("https://"):
+        input_img = download_image(url, name)
+    else:
+        input_img = PIL.Image.open(url)
+        input_img.save(f"Input_images/{name}/input.png")
+    return input_img

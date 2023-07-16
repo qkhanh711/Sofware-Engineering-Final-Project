@@ -15,7 +15,7 @@ from torchvision import transforms
 from diffusers import StableDiffusionPipeline, EulerAncestralDiscreteScheduler
 from diffusers import StableDiffusionInstructPix2PixPipeline as StableDiffusionPipelineP2P
 
-from utils import predict_step, download_image
+from utils import predict_step, download_image, CheckthenDown
 import subprocess
 import argparse
 import PIL
@@ -63,13 +63,11 @@ def generate_with_pretrained_model(name, prompt, url = None):
             input_img = download_image(url, name)
             return predict_step(["Input_images/nlpconnect/vit-gpt2-image-captioning/input.png"])
         else:
+            input_img = PIL.Image.open(url)
+            input_img.save(f"Input_images/{name}/input.png")
             return predict_step([url])
     elif name == "GFPGAN":
-        if url.startswith("https://"):
-            input_img = download_image(url, name)
-        else:
-            input_img = PIL.Image.open(url)
-            input_img.save("Input_images/GFPGAN/input.png")
+        CheckthenDown(url,name)
         command = [
             "python",
             "pretrained/GFPGAN/inference_gfpgan.py",
@@ -106,10 +104,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
                 gen_image = pipe(prompt).images[0] 
             elif name == "timbrooks/instruct-pix2pix":
                 pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
-                if url.startswith("https://"):
-                    input_img =  download_image(url, name)
-                else:
-                    input_img = PIL.Image.open(url)
+                input_img = CheckthenDown(url,name)
                 gen_image = pipe(prompt, image=input_img, num_inference_steps=10, image_guidance_scale=1).images[0]
             path = f"Generative_images/{name}/pdf.png"
             gen_image.save(f"Generate_images/{name}/pdf.png")
