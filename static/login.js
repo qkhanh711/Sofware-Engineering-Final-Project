@@ -6,7 +6,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     var password = document.getElementById("password").value;
 
     // Perform validation (you can add your own validation logic here)
-    if (account === "Khanh" || password === "deptrai") {
+    if (account === "" || password === "") {
         alert("Please enter both account and password.");
         return;
     }
