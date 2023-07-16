@@ -11,6 +11,7 @@ import os
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/Input_images", StaticFiles(directory="Input_images"), name="Input_images")
 app.mount("/Generate_images", StaticFiles(directory="Generate_images"), name="Generate_images")
 app.mount("/pretrained", StaticFiles(directory="pretrained"), name="pretrained")
 templates = Jinja2Templates(directory="templates")
@@ -26,7 +27,7 @@ class MyImage(BaseModel):
     image: str
 
 class Caption(BaseModel):
-    cap: str
+    cap: Union[str, None] = None
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
@@ -43,7 +44,7 @@ async def generate_image(request: ImageGenerationRequest):
     )
 
     if model == "nlpconnect/vit-gpt2-image-captioning":
-        generated_result = Caption(cap=result)
+        generated_result = Caption(cap= " ".join(result))
     else:
         generated_result = MyImage(image=result)
 

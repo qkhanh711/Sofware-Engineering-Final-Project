@@ -33,16 +33,24 @@ document.getElementById("image-form").addEventListener("submit", async function(
         resultDiv.innerHTML = "";
 
         if (generatedResult.image) {
-            
             const imgElement = document.createElement("img");
             imgElement.src = `.${generatedResult.image}`;
+            imgElement.alt = "Generated Image";
+            imgElement.className = "result-image";
             resultDiv.appendChild(imgElement);
         } else if (generatedResult.cap) {
             const pElement = document.createElement("p");
             pElement.textContent = generatedResult.cap;
+            pElement.className = "result-caption";
             resultDiv.appendChild(pElement);
         }
     } else {
         console.log("No generated result available");
     }
+
+    // Set input image path
+    const model = res.model;
+    const inputImagePath = `./Input_images/${model}/input.png`;
+    const inputImageElement = document.getElementById("input-image");
+    inputImageElement.src = inputImagePath;
 });
