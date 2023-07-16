@@ -16,7 +16,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     alert("Login successful!");
 
     // Redirect to the index page (you can replace the URL with your actual index page)
-    window.location.href = "/templates/index.html";
+    window.location.href = "./index";
 });
 
 document.getElementById("forgot-password-link").addEventListener("click", function(event) {
