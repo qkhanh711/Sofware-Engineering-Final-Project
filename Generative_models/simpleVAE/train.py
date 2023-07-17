@@ -1,3 +1,4 @@
+import argparse
 import torch
 import torchvision.datasets as datasets
 from tqdm import tqdm
@@ -14,23 +15,27 @@ except:
     from Generative_models.simpleVAE.VAE import *
 from torch import nn, optim
 
-# Load data MNIST
-dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download = True)
-train_loader = DataLoader(dataset=dataset, batch_size=config.batch_size, shuffle = True)
+# Create argument parser
+parser = argparse.ArgumentParser(description='Simple VAE Training')
+parser.add_argument('--in_dims', type=int, default=784, help='Input dimensions')
+parser.add_argument('--h_dims', type=int, default=200, help='Hidden dimensions')
+parser.add_argument('--z_dims', type=int, default=20, help='Latent dimensions')
+parser.add_argument('--epochs', type=int, default=10, help='Number of epochs')
+parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
+parser.add_argument('--lr', type=float, default=0.005, help='Learning rate')
+args = parser.parse_args()
 
-model = VAE(config.in_dims, config.h_dims, config.z_dims).to(config.device)
-optimizer = optim.Adam(model.parameters(), lr=config.lr)
+# Load data MNIST
+dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download=True)
+train_loader = DataLoader(dataset=dataset, batch_size=args.batch_size, shuffle=True)
+
+model = VAE(args.in_dims, args.h_dims, args.z_dims).to(config.device)
+optimizer = optim.Adam(model.parameters(), lr=args.lr)
 loss_fn = nn.BCELoss(reduction="sum")
 
-# for i,(x, _) in enumerate(train_loader):
-#     x = x.to(config.device).view(x.shape[0], config.in_dims)
-# print(x.shape)
-# print(x.type)
-
-for epoch in range(config.epochs):
+for epoch in range(args.epochs):
     for i, (x, _) in tqdm(enumerate(train_loader)):
-    # for i, (x, _) in enumerate(train_loader):
-        x = x.to(config.device).view(x.shape[0], config.in_dims)
+        x = x.to(config.device).view(x.shape[0], args.in_dims)
         x_reconstructed, mu, sigma = model(x)
 
         # Loss
@@ -42,6 +47,5 @@ for epoch in range(config.epochs):
         loss.backward()
         optimizer.step()
     save_checkpoint(model, optimizer, filename=config.CHECKPOINT)
-    # tqdm(enumerate(train_loader)).set_postfix(loss=loss.item())
-    print("epoch: " + str(epoch+1))
-    print("loss: ", loss)
+    print("epoch:", epoch + 1)
+    print("loss:", loss)

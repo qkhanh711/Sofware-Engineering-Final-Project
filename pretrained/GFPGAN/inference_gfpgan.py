@@ -155,6 +155,7 @@ def main():
             # save comparison image
             cmp_img = np.concatenate((cropped_face, restored_face), axis=1)
             # imwrite(cmp_img, os.path.join(args.output, 'cmp', f'gfp_{idx:02d}.png'))
+            imwrite(cmp_img, os.path.join(args.output, f'gfp_{idx:02d}.png'))
 
         # save restored img
         if restored_img is not None:
