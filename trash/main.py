@@ -40,6 +40,10 @@ async def index(request: Request):
 async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@app.get("/register", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("register.html", {"request": request})
+
 @app.get("/login", response_class=HTMLResponse)
 async def login(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
@@ -47,9 +51,9 @@ async def login(request: Request):
 @app.post("/generateImage", response_class=JSONResponse)
 async def generate_image(request: ImageGenerationRequest):
     if request.path_type == "local":
-        path = request.path
+        get_path = request.path
     elif request.path_type == "url":
-        path = request.get_url
+        get_path = request.get_url
     else:
         return {"message": "Invalid path type"}
 
@@ -58,11 +62,11 @@ async def generate_image(request: ImageGenerationRequest):
         number=request.number,
         idx=request.idx,
         prompt=request.prompt,
-        url=convert2_(path),
+        url=convert2_(get_path),
     )
 
     if model == "nlpconnect/vit-gpt2-image-captioning":
-        generated_result = Caption(cap=" ".join(result))
+        generated_result = Caption(cap= " ".join(result))
     else:
         generated_result = MyImage(image=result)
 
@@ -70,7 +74,6 @@ async def generate_image(request: ImageGenerationRequest):
         return {"generated_result": generated_result}
     else:
         return {"message": "No generated result available"}
-
 
 @app.get("/getImage")
 async def get_image(path: str):
