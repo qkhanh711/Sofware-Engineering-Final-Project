@@ -38,6 +38,10 @@ async def index(request: Request):
 async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@app.get("/register", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("register.html", {"request": request})
+
 @app.get("/login", response_class=HTMLResponse)
 async def login(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
