@@ -85,8 +85,8 @@ def generate_with_pretrained_model(name, prompt, url = None):
         # subprocess.run(["rm", "-rf", "pretrained/GFPGAN/results"], cwd="Sofware-Engineering-Final-Project")
         subprocess.run(command, cwd="../Sofware-Engineering-Final-Project")
         # subprocess.run(["ls", "pretrained/GFPGAN/results/cmp"], cwd="../Sofware-Engineering-Final-Project/")
-        # path = "/Generate_images/GFPGAN/gfp.png"
-        path = "/Generate_images/GFPGAN/gfp_00.png"
+        path = "/Generate_images/GFPGAN/gfp.png"
+        # path = "/Generate_images/GFPGAN/gfp_00.png"
         return path 
     else:
         if name == "timbrooks/instruct-pix2pix":
