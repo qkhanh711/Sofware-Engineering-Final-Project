@@ -30,5 +30,5 @@ document.getElementById("register-link").addEventListener("click", function(even
     event.preventDefault(); // Prevent link navigation
 
     // Redirect to the register page (you can replace the URL with your actual register page)
-    window.location.href = "register.html";
+    window.location.href = "./register";
 });
