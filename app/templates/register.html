@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/style/style.css">   
+</head>
+<script>
+    function verifyPassword() {
+        var pw = document.getElementById("hashed_password").value;
+
+        //minimum password length validation
+        if(pw.length < 8) {
+            document.getElementById("message1").innerHTML = "**Password length must be at least 8 characters";
+            return false;
+        }
+
+        //maximum length of password validation
+        if(pw.length > 15) {
+            document.getElementById("message1").innerHTML = "**Password length must not exceed 15 characters";
+            return false;
+        }
+    }
+
+    function matchPassword() {
+        var pw1 = document.getElementById("hashed_password");
+        var pw2 = document.getElementById("confirm_password");
+        if(pw1 != pw2)
+        {
+            document.getElementById("message2").innerHTML = "Passwords did not match";
+        }
+    }
+</script>
+<body>
+    <div class="container">
+        <h1 class="heading">Register</h1>
+        <form id="register-form" method="post" action="/register" onsubmit ="return verifyPassword()">
+            <div>
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" id="username" name="username" class="form-input" required>
+            </div>
+            <div>
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" class="form-input" required>
+            </div>
+            <div>
+                <label for="hashed_password" class="form-label">Password:</label>
+                <input type="password" id="hashed_password" name="hashed_password" class="form-input" required>
+                <span id = "message1" style="color:red"> </span> <br><br>
+            </div>
+            <div>
+                <label for="confirm_password" class="form-label">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-input" required>
+                <span id = "message2" style="color:red"> </span> <br><br>
+            </div>
+            <button type="submit" class="form-button" onclick="matchPassword()">Register</button>
+        </form>
+        <div>
+            <p>Already have an account? <a href="/login">Login</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
+
+

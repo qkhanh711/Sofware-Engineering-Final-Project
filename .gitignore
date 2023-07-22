@@ -1,0 +1,15 @@
+*\.idea
+*\__pycache__
+*\.vscode
+*\node_modules
+*\dist
+*\.bin
+*\.csv
+*\ProGan
+
+.ipynb_checkpoints
+__config__.py
+*\.parquet
+*\tmp
+*\.pth
+*\logs
