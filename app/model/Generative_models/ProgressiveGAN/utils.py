@@ -99,7 +99,7 @@ def generate_examples(gen, steps, root_path, truncation=0.7, n=None):
             import torch.nn.functional as F
             img = F.interpolate(img, size=(512, 512), mode='bilinear', align_corners=False)
             path = f"{root_path}/ProGAN/ProGAN_{i}.png"
-            path_save = f"/Generate_images/ProGAN/ProGAN_{i}.png"
+            path_save = f"/model/Generate_images/ProGAN/ProGAN_{i}.png"
             save_image(img * 0.5 + 0.5, path)
     gen.train()
     return img, path_save

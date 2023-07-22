@@ -18,8 +18,10 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/style", StaticFiles(directory="style"), name="style")
-app.mount("/model", StaticFiles(directory="model"), name="model")
-app.mount("/pretrained", StaticFiles(directory="model/pretrained"), name="pretrained")
+# app.mount("/model", StaticFiles(directory="model"), name="model")
+app.mount("/Input_images", StaticFiles(directory="model/Input_images"), name="Input_images")
+# app.mount("/model/Generate_images", StaticFiles(directory="model/Generate_images"), name="Generate_images")
+# app.mount("/model/pretrained", StaticFiles(directory="model/pretrained"), name="pretrained")
 templates = Jinja2Templates(directory="templates")
 
 def get_db():

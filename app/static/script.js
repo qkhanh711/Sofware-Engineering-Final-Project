@@ -50,7 +50,7 @@ document.getElementById("image-form").addEventListener("submit", async function(
 
     // Set input image path
     const model = res.model;
-    const inputImagePath = `./Input_images/${model}/input.png`;
+    const inputImagePath = `./model/Input_images/${model}/input.png`;
     const inputImageElement = document.getElementById("input-image");
     inputImageElement.src = inputImagePath;
 });

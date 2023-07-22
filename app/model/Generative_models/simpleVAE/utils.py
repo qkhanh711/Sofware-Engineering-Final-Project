@@ -78,6 +78,6 @@ def inference(dataset, model, digit, num_examples=1):
         out = out.view(-1, 1, 28, 28)
         out = F.interpolate(out, size=(512, 512), mode='bilinear', align_corners=False)
         path = f"../app/model/Generate_images/VAE/VAE_{digit}.png"
-        path_save = f"/Generate_images/VAE/VAE_{digit}.png"
+        path_save = f"/model/Generate_images/VAE/VAE_{digit}.png"
         save_image(out, path)
     return out, path_save
