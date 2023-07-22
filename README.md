@@ -1,5 +1,7 @@
 # Sofware-Engineering-Final_Project
 
+<a target="_blank" href="https://colab.research.google.com/drive/1fEBUoaJXQ-OtmNi54u-bEaE45CRi9C0d?authuser=0#scrollTo=9iI3sGIYH8dO"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 Source Code Bài tâp lớn Kỹ thuật phần mềm về quản lí trang web ứng dụng các mô hình sinh để sinh ảnh và câu văn
 
