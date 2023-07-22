@@ -109,7 +109,7 @@ def generate_with_pretrained_model(name, prompt, url = None):
                 gen_image = pipe(prompt, image=input_img, num_inference_steps=10, image_guidance_scale=1).images[0]
             path = f"/model/Generative_images/{name}/pdf.png"
             gen_image = gen_image.resize((512,512))
-            gen_image.save(f"/model/Generate_images/{name}/pdf.png")
+            gen_image.save(f"model/Generate_images/{name}/pdf.png")
             return path 
 
 
