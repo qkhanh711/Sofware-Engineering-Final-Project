@@ -43,12 +43,14 @@ sau khi clone có folder:
 
         https://repo.anaconda.com/archive/Anaconda3-2023.07-1-Windows-x86_64.exe
 
-**Bước 2:** Mở anaconda, tạo environment, kích hoạt environment
+**Bước 2:** Mở anaconda powershell prompt, tạo environment, kích hoạt environment
     
         conda create --name SE python=3.10
         conda activate SE
 
-**Bước 3:** Mở anaconda powershell prompt, di chuyển tới thư mục Software-Engineering-Final-Project, tải các package cần có để chạy code ở file requirement.txt bằng lệnh sau:
+![step3](Images/anaconda.png)
+
+**Bước 3:** Di chuyển tới thư mục Software-Engineering-Final-Project, tải các package cần có để chạy code ở file requirement.txt bằng lệnh sau:
         
         pip install -r requirement.txt
 
