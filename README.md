@@ -8,7 +8,7 @@ Source Code Bài tâp lớn Kỹ thuật phần mềm về quản lí trang web 
 ## Sử dụng: 
 
          - python, html, js, css
-         - Framework: Pytorch --> Xây dựng mo hình, huấn luyện lưu kết quả.
+         - Framework: Pytorch --> Xây dựng mô hình, huấn luyện lưu kết quả.
 
 ## Nhóm 8: 
 
@@ -68,7 +68,7 @@ sau khi clone có folder:
 
 ![step5](Images/Login.png)
 
---> Thực hiện đăng ký tài khoản (Click vào Register). Sau khi đăng nhập thành côgn sẽ về lại Login
+--> Thực hiện đăng ký tài khoản (Click vào Register). Sau khi đăng nhập thành công sẽ về lại Login
 
 ![step5](Images/Register.png)
 
