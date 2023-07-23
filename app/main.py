@@ -15,7 +15,7 @@ from modules.database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app = FastAPI(title="Software Engineering", description="with FastAPI and Generative models", version="1.0")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/style", StaticFiles(directory="style"), name="style")
 app.mount("/model", StaticFiles(directory="model"), name="model")
@@ -109,3 +109,6 @@ if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app)
     # http://127.0.0.1:8000/generateImage?models=nlpconnect_vit-gpt2-image-captioning&path=_home_nyanmaruk_Uni_Sofware-Engineering-Final-Project_pretrained_GFPGAN_inputs_upload_deptry.jpg&prompt=some_prompt
+    from colabcode import ColabCode
+    cc = ColabCode(port=12000, code=False)
+    cc.run_app(app=app)
