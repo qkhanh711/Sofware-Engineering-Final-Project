@@ -26,7 +26,7 @@ parser.add_argument('--lr', type=float, default=0.005, help='Learning rate')
 args = parser.parse_args()
 
 # Load data MNIST
-dataset = datasets.MNIST(root="../datasets/mnist", train=True, transform=transforms.ToTensor(), download=True)
+dataset = datasets.MNIST(root="../../datasets/mnist", train=True, transform=transforms.ToTensor(), download=True)
 train_loader = DataLoader(dataset=dataset, batch_size=args.batch_size, shuffle=True)
 
 model = VAE(args.in_dims, args.h_dims, args.z_dims).to(config.device)

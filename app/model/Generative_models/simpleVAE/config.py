@@ -7,4 +7,4 @@ z_dims = 20
 epochs = 10
 batch_size = 32
 lr = 0.005
-CHECKPOINT = "../weightVAE/VAE.pth"
+CHECKPOINT = "../../weightVAE/VAE.pth"
