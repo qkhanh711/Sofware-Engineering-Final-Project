@@ -30,7 +30,6 @@ sau khi clone có folder:
 
         Software-Engineering-Final-Project/
             app/
-                Images/
                 model/
                 modules/
                 static/
@@ -40,6 +39,7 @@ sau khi clone có folder:
                 Generate.py
                 main.py
                 utils.py
+            Images/
             README.md
             requirement.txt
 
