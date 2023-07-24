@@ -3,24 +3,28 @@
 <a target="_blank" href="https://colab.research.google.com/drive/1fEBUoaJXQ-OtmNi54u-bEaE45CRi9C0d?authuser=0#scrollTo=9iI3sGIYH8dO"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-Source Code Bài tâp lớn Kỹ thuật phần mềm về quản lí trang web ứng dụng các mô hình sinh để sinh ảnh và câu văn
+Source Code Bài tâp lớn Kỹ thuật phần mềm về quản lý trang web ứng dụng các mô hình sinh để sinh ảnh và câu văn
 
 ## Sử dụng: 
 
          - python, html, js, css
          - Framework: Pytorch --> Xây dựng mô hình, huấn luyện lưu kết quả.
 
-## Nhóm 8: 
+## Nhóm: 
 
-                             | Nguyễn Quốc Khánh|  Lê Vĩnh Hưng | Đào Đức Minh |
-                             |     21011495     |   21010988    |   21010586   |  
-                             |     K15-KHMT     |  K15-CNTT-VJ1 |   K15-CNTT1  |
+                             | Nguyễn Quốc Khánh|   Lê Vĩnh Hưng   |   Đào Đức Minh   |
+                             |     21011495     |     21011494     |      21010555    |  
+                             |     K15-KHMT     |     K15-KHMT     |      K15-KHMT    |
 
 ## Hướng dẫn chạy code:
 
 Clone code từ git
 
          git clone https://github.com/qkhanh711/Sofware-Engineering-Final-Project.git
+
+Tải file lưu trọng số mô hình bằng link:
+
+         link
 
 sau khi clone có folder:
 
@@ -45,7 +49,7 @@ sau khi clone có folder:
 
         https://repo.anaconda.com/archive/Anaconda3-2023.07-1-Windows-x86_64.exe
 
-**Bước 2:** Mở anaconda powershell prompt, tạo environment, kích hoạt environment
+**Bước 2:** Mở **Anaconda Powershell Prompt**, tạo environment, kích hoạt environment
     
         conda create --name SE python=3.10
         conda activate SE
